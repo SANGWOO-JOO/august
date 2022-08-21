@@ -7,8 +7,8 @@ buildscript {
 }
 
 plugins {
-	id 'org.springframework.boot' version '2.6.4'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'org.springframework.boot' version '2.6.11'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 }
 
@@ -21,7 +21,6 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
-
 
 repositories {
 	mavenCentral()
@@ -37,12 +36,16 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	implementation 'org.modelmapper:modelmapper:3.1.0'
+
+
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
 
-	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	annotationProcessor(
 
@@ -53,16 +56,9 @@ dependencies {
 			"com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 
 
-	implementation 'org.modelmapper:modelmapper:3.1.0'
-
-	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
-
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-
-
-	implementation 'net.coobird:thumbnailator:0.4.16'
-
+	//Lombok 테스트 환경에서도 사용하기
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
